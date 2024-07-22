@@ -2,7 +2,7 @@ const path = require('path')
 module.exports = {
   version: "2.0",
   title: "PhotoMaker2",
-  description: "",
+  description: "Customizing Realistic Human Photos via Stacked ID Embedding https://huggingface.co/spaces/TencentARC/PhotoMaker-V2",
   icon: "icon.png",
   menu: async (kernel, info) => {
     let installed = info.exists("app/env")
