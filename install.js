@@ -23,13 +23,40 @@ module.exports = {
     },
     // Edit this step with your custom install commands
     {
+      when: "{{gpu==='nvidia'}}",
+      method: "shell.run",
+      params: {
+        venv: "env",
+        path: "app",
+        message: "pip install onnxruntime-gpu",
+      }
+    },
+    {
+      when: "{{platform==='darwin'}}",
+      method: "shell.run",
+      params: {
+        venv: "env",
+        path: "app",
+        message: "pip install onnxruntime-silicon",
+      }
+    },
+    {
+      when: "{{platform!=='darwin' && gpu !=='nvidia'}}",
+      method: "shell.run",
+      params: {
+        venv: "env",
+        path: "app",
+        message: "pip install onnxruntime",
+      }
+    },
+    // Edit this step with your custom install commands
+    {
       method: "shell.run",
       params: {
         venv: "env",                // Edit this to customize the venv folder path
         path: "app",                // Edit this to customize the path to start the shell from
         message: [
           "pip install gradio devicetorch",
-          "pip install {{gpu==='nvidia' ? 'onnxruntime-gpu' : 'onnxruntime'}}",
           "pip install -r requirements.txt"
         ]
       }
