@@ -28,6 +28,16 @@ module.exports = {
       params: {
         venv: "env",
         path: "app",
+        message: "conda install -y cudnn -c conda-forge --update-deps --force-reinstall"
+
+      }
+    },
+    {
+      when: "{{gpu==='nvidia'}}",
+      method: "shell.run",
+      params: {
+        venv: "env",
+        path: "app",
         message: "pip install onnxruntime-gpu --extra-index-url https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/onnxruntime-cuda-12/pypi/simple/"
       }
     },
