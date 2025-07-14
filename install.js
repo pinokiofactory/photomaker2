@@ -9,6 +9,16 @@ module.exports = {
         ]
       }
     },
+    // Edit this step with your custom install commands
+    {
+      when: "{{gpu==='nvidia'}}",
+      method: "shell.run",
+      params: {
+        venv: "env",
+        path: "app",
+        message: "conda install -y anaconda::cudnn --update-deps --force-reinstall"
+      }
+    },
     // Delete this step if your project does not use torch
     {
       method: "script.start",
@@ -23,57 +33,15 @@ module.exports = {
     },
     // Edit this step with your custom install commands
     {
-      when: "{{gpu==='nvidia'}}",
-      method: "shell.run",
-      params: {
-        venv: "env",
-        path: "app",
-        message: "conda install -y anaconda::cudnn --update-deps --force-reinstall"
-      }
-    },
-    {
-      when: "{{gpu==='nvidia'}}",
-      method: "shell.run",
-      params: {
-        venv: "env",
-        path: "app",
-        message: "pip install onnxruntime-gpu --extra-index-url https://aiinfra.pkgs.visualstudio.com/PublicPackages/_packaging/onnxruntime-cuda-12/pypi/simple/"
-      }
-    },
-    {
-      when: "{{platform==='darwin'}}",
-      method: "shell.run",
-      params: {
-        venv: "env",
-        path: "app",
-        message: "pip install onnxruntime-silicon",
-      }
-    },
-    {
-      when: "{{platform!=='darwin' && gpu !=='nvidia'}}",
-      method: "shell.run",
-      params: {
-        venv: "env",
-        path: "app",
-        message: "pip install onnxruntime",
-      }
-    },
-    // Edit this step with your custom install commands
-    {
       method: "shell.run",
       params: {
         venv: "env",                // Edit this to customize the venv folder path
         path: "app",                // Edit this to customize the path to start the shell from
         message: [
-          "pip install gradio devicetorch",
-          "pip install -r requirements.txt"
+          "uv pip install gradio devicetorch",
+          "uv pip install -r requirements.txt",
+          "uv pip install -U transformers numpy==1.26.4"
         ]
-      }
-    },
-    {
-      method: "fs.link",
-      params: {
-        venv: "app/env"
       }
     }
   ]
