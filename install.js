@@ -40,7 +40,7 @@ module.exports = {
         message: [
           "uv pip install gradio devicetorch",
           "uv pip install -r requirements.txt",
-          "uv pip install transformers==4.56.1 numpy==1.26.4"
+          "uv pip install transformers==4.56.1 numpy==1.26.4 peft==0.17.1"
         ]
       }
     }
