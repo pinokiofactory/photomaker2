@@ -21,17 +21,6 @@ module.exports = {
       }
     },
     {
-      method: "script.start",
-      params: {
-        uri: "torch.js",
-        params: {
-          venv: "env",
-          path: "app",
-          // xformers: true
-        }
-      }
-    },
-    {
       method: "shell.run",
       params: {
         venv: "env",
@@ -41,6 +30,17 @@ module.exports = {
           "uv pip install -r requirements.txt",
           "uv pip install transformers==4.56.1 numpy==1.26.4 peft==0.17.1 huggingface_hub==0.36"
         ]
+      }
+    },
+    {
+      method: "script.start",
+      params: {
+        uri: "torch.js",
+        params: {
+          venv: "env",
+          path: "app",
+          // xformers: true
+        }
       }
     }
   ]
